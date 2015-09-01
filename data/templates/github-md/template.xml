@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<template>
+  <author>Jason Dent</author>
+  <email>jason@revinate.com</email>
+  <version>0.1.1</version>
+  <copyright>Revinate</copyright>
+  <description>This is a github markdown generator.</description>
+  <transformations>
+    <transformation query="indexes.namespaces" writer="twig" source="templates/github-md/namespace.md.html.twig" />
+  </transformations>
+</template>

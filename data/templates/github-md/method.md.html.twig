@@ -1,0 +1,37 @@
+### Description
+{{ method.description|raw }}
+
+<table>
+{% for tagList in method.tags if tagList.0.name not in ['param', 'return', 'api'] %}
+<tr>
+<th>
+{{ tagList.0.name|raw }}
+</th>
+<td>
+{% for tag in tagList %}
+{% if (tag.name == "since" or "deprecated") %}
+{{ tag.version }}
+{% endif %}
+{% if (tag.name == "see") %}
+{{ tag.reference|route|raw }}
+{% endif %}
+{{ tag.description|raw }}
+{% endfor %}
+</td>
+</tr>
+{% endfor %}
+</table>
+
+{% if method.arguments|length > 0 %}
+### Arguments
+
+{% for argument in method.arguments %}
+- {{ argument.name }} `{{ argument.types|route|join('|')|raw }}` -  {{ argument.description|raw }}
+{% endfor %}
+{% endif %}
+
+{% if method.response.types and method.response.types|join() != 'void' %}
+### Response
+
+`{{ method.response.types|route|join('|')|raw }}` - {{ method.response.description|raw }}
+{% endif %}
